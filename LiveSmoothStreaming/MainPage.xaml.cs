@@ -58,18 +58,7 @@ namespace LiveSmoothStreaming
             catch (Exception)
             {
             }
-
-            SmoothPlayer.Width = Application.Current.Host.Content.ActualWidth;
-            SmoothPlayer.Height = Application.Current.Host.Content.ActualHeight;
-            //controlsContainer.Visibility = Visibility.Collapsed;
-            //SLVersion.Visibility = Visibility.Collapsed;
-            //fullScreenButton.Visibility = Visibility.Collapsed;
-            SmoothPlayer.Margin = new Thickness(0, 0, 0, 0);
-            
-
-            ManifestURL.Text = "http://stream.linear.yelo.prd.telenet-ops.be/eenhd.isml/manifest";
-            PlayButton_Click(null, null);
-
+           
         }
        
         void UserControl_Loaded(object sender, RoutedEventArgs e)
@@ -78,20 +67,24 @@ namespace LiveSmoothStreaming
             SmoothPlayer.Volume = .5;
             VolumeBar.Value = 5;
 
-
+            // force somewhat full screen 
+            SmoothPlayer.Width = Application.Current.Host.Content.ActualWidth;
+            SmoothPlayer.Height = Application.Current.Host.Content.ActualHeight;
+            controlsContainer.Visibility = Visibility.Collapsed;
+            SLVersion.Visibility = Visibility.Collapsed;
+            fullScreenButton.Visibility = Visibility.Collapsed;
+            SmoothPlayer.Margin = new Thickness(0, 0, 0, 0);
 
             // my code to get params from url
-            String _message = null;
             String manifestName = "eenhd";
             IDictionary<string, string> qString = HtmlPage.Document.QueryString;
             foreach (KeyValuePair<string, string> keyValuePair in qString)
             {
-                if (keyValuePair.Key == "param1")
-                    _message = keyValuePair.Value;
                 if (keyValuePair.Key == "manifest")
                     manifestName = keyValuePair.Value;
             }
-            //MessageBox.Show(manifestName);
+
+            // play manifest url
             ManifestURL.Text = "http://stream.linear.yelo.prd.telenet-ops.be/" + manifestName +".isml/manifest";
             PlayButton_Click(null, null);
         }

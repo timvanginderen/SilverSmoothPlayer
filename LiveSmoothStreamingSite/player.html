@@ -26,29 +26,6 @@
     }
     </style>
 
-    <script type="text/javascript">
-        var urlParams;
-        (window.onpopstate = function () {
-            var match,
-                pl = /\+/g,  // Regex for replacing addition symbol with a space
-                search = /([^&=]+)=?([^&]*)/g,
-                decode = function (s) { return decodeURIComponent(s.replace(pl, " ")); },
-                query = window.location.search.substring(1);
-
-            urlParams = {};
-            while (match = search.exec(query))
-                urlParams[decode(match[1])] = decode(match[2]);
-        })();
-
-        var manifest = urlParams["manifest"];
-        //alert(manifest);
-
-        //pass value to code behind layer
-        //document.getElementById("manifest").value = manifest;
-        //alert(document.getElementById("manifest").value);
-        $("#<%= HiddenField.Manifest %>").val(manifest);
-    </script>
- 
 </head>
 <body>
     <input type="hidden" name="manifest" id="manifest" value="">
