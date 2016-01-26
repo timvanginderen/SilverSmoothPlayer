@@ -1,0 +1,36 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title>Landing page</title>
+	<meta charset="utf-8" />
+    
+</head>
+<body>
+    <select id="selectChannel" onchange="channelChanged();">
+        <option>Choose a channel</option>
+    </select>
+
+    <script type="text/javascript">
+        var select = document.getElementById("selectChannel");
+        var options = ["eenhd", "vtmhd", "vierhd", "ketnetcanvashd", "vijfhd",
+            "vitaya", "acht", "rexrioinfo", "ketnet", "foxbelgium", "dicoveryhd",
+            "tlcvlaanderen", "njam", "sundancehd", "bbcprime", "nickjr",
+            "studio100tv", "menttv", "qmusic", "actuatv", "cartoonnetwork",
+            "xite", "ned1", "ned2", "ned3", "launehd", "ab3",
+            "eurosporthd", "eurosport2" ];
+        for (var i = 0; i < options.length; i++) {
+            var opt = options[i];
+            var el = document.createElement("option");
+            el.textContent = opt;
+            el.value = opt;
+            select.appendChild(el);
+        }
+
+        var channelChanged = function () {
+            var manifest = document.getElementById("selectChannel").value;
+            var url = "player.html?manifest=" + manifest;
+            location.href = url;
+        }
+    </script>
+</body>
+</html>
