@@ -29,7 +29,7 @@
         var channelChanged = function () {
             var manifest = document.getElementById("selectChannel").value;
             var url = "player.html?manifest=" + manifest;
-            location.href = url;
+            window.open(url, '_blank');
         }
     </script>
 </body>
