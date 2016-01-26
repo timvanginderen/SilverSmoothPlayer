@@ -57,6 +57,9 @@ namespace LiveSmoothStreaming
             catch (Exception)
             {
             }
+
+            ManifestURL.Text = "http://stream.linear.yelo.prd.telenet-ops.be/eenhd.isml/manifest";
+            PlayButton_Click(null, null);
         }
        
         void UserControl_Loaded(object sender, RoutedEventArgs e)
