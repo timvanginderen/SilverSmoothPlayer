@@ -70,8 +70,6 @@ namespace LiveSmoothStreaming
             ManifestURL.Text = "http://stream.linear.yelo.prd.telenet-ops.be/eenhd.isml/manifest";
             PlayButton_Click(null, null);
 
-            Debug.Text = "----------------------------------------------------------";
-
         }
        
         void UserControl_Loaded(object sender, RoutedEventArgs e)
@@ -84,7 +82,7 @@ namespace LiveSmoothStreaming
 
             // my code to get params from url
             String _message = null;
-            String manifestName = null;
+            String manifestName = "eenhd";
             IDictionary<string, string> qString = HtmlPage.Document.QueryString;
             foreach (KeyValuePair<string, string> keyValuePair in qString)
             {
@@ -93,7 +91,9 @@ namespace LiveSmoothStreaming
                 if (keyValuePair.Key == "manifest")
                     manifestName = keyValuePair.Value;
             }
-            MessageBox.Show(manifestName);
+            //MessageBox.Show(manifestName);
+            ManifestURL.Text = "http://stream.linear.yelo.prd.telenet-ops.be/" + manifestName +".isml/manifest";
+            PlayButton_Click(null, null);
         }
 
         void SmoothPlayer_ManifestReady(object sender, EventArgs e)
