@@ -67,21 +67,29 @@ namespace LiveSmoothStreaming
             SmoothPlayer.Volume = .5;
             VolumeBar.Value = 5;
 
-            // force somewhat full screen 
-            SmoothPlayer.Width = Application.Current.Host.Content.ActualWidth;
-            SmoothPlayer.Height = Application.Current.Host.Content.ActualHeight;
-            controlsContainer.Visibility = Visibility.Collapsed;
-            SLVersion.Visibility = Visibility.Collapsed;
-            fullScreenButton.Visibility = Visibility.Collapsed;
-            SmoothPlayer.Margin = new Thickness(0, 0, 0, 0);
-
             // my code to get params from url
             String manifestName = "eenhd";
+            Boolean debugMode = false;
+
             IDictionary<string, string> qString = HtmlPage.Document.QueryString;
             foreach (KeyValuePair<string, string> keyValuePair in qString)
             {
                 if (keyValuePair.Key == "manifest")
                     manifestName = keyValuePair.Value;
+
+                if (keyValuePair.Key == "debug")
+                    debugMode = keyValuePair.Value == "true";
+            }
+
+            // force somewhat full screen 
+            if (!debugMode)
+            {
+                SmoothPlayer.Width = Application.Current.Host.Content.ActualWidth;
+                SmoothPlayer.Height = Application.Current.Host.Content.ActualHeight;
+                controlsContainer.Visibility = Visibility.Collapsed;
+                SLVersion.Visibility = Visibility.Collapsed;
+                fullScreenButton.Visibility = Visibility.Collapsed;
+                SmoothPlayer.Margin = new Thickness(0, 0, 0, 0);
             }
 
             // play manifest url
