@@ -58,6 +58,13 @@ namespace LiveSmoothStreaming
             {
             }
 
+            SmoothPlayer.Width = Application.Current.Host.Content.ActualWidth;
+            SmoothPlayer.Height = Application.Current.Host.Content.ActualHeight;
+            controlsContainer.Visibility = Visibility.Collapsed;
+            SLVersion.Visibility = Visibility.Collapsed;
+            fullScreenButton.Visibility = Visibility.Collapsed;
+            SmoothPlayer.Margin = new Thickness(0, 0, 0, 0);
+
             ManifestURL.Text = "http://stream.linear.yelo.prd.telenet-ops.be/eenhd.isml/manifest";
             PlayButton_Click(null, null);
         }
