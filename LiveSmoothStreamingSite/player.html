@@ -25,15 +25,40 @@
 	    text-align:center;
     }
     </style>
+
+    <script type="text/javascript">
+        var urlParams;
+        (window.onpopstate = function () {
+            var match,
+                pl = /\+/g,  // Regex for replacing addition symbol with a space
+                search = /([^&=]+)=?([^&]*)/g,
+                decode = function (s) { return decodeURIComponent(s.replace(pl, " ")); },
+                query = window.location.search.substring(1);
+
+            urlParams = {};
+            while (match = search.exec(query))
+                urlParams[decode(match[1])] = decode(match[2]);
+        })();
+
+        var manifest = urlParams["manifest"];
+        //alert(manifest);
+
+        //pass value to code behind layer
+        //document.getElementById("manifest").value = manifest;
+        //alert(document.getElementById("manifest").value);
+        $("#<%= HiddenField.Manifest %>").val(manifest);
+    </script>
  
 </head>
 <body>
-    
+    <input type="hidden" name="manifest" id="manifest" value="">
+
+
 	<div id="silverlightControlHost">
 		<object data="data:application/x-silverlight-2," type="application/x-silverlight-2" style="height: 100%; width: 100%;">
 			<param name="source" value="ClientBin/LiveSmoothStreaming.xap"/>
 			<param name="onerror" value="onSilverlightError" />
-			<param name="background" value="black" />
+			<param name="background" value="white" />
             <param name="enableGPUAcceleration" value="true"/>
 			<param name="minRuntimeVersion" value="4.0.50401.0" />
 			<param name="autoUpgrade" value="true" />

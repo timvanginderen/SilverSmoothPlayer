@@ -12,6 +12,7 @@ using System.Windows.Interop;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using System.Windows.Browser;
 
 namespace LiveSmoothStreaming
 {
@@ -60,13 +61,17 @@ namespace LiveSmoothStreaming
 
             SmoothPlayer.Width = Application.Current.Host.Content.ActualWidth;
             SmoothPlayer.Height = Application.Current.Host.Content.ActualHeight;
-            controlsContainer.Visibility = Visibility.Collapsed;
-            SLVersion.Visibility = Visibility.Collapsed;
-            fullScreenButton.Visibility = Visibility.Collapsed;
+            //controlsContainer.Visibility = Visibility.Collapsed;
+            //SLVersion.Visibility = Visibility.Collapsed;
+            //fullScreenButton.Visibility = Visibility.Collapsed;
             SmoothPlayer.Margin = new Thickness(0, 0, 0, 0);
+            
 
             ManifestURL.Text = "http://stream.linear.yelo.prd.telenet-ops.be/eenhd.isml/manifest";
             PlayButton_Click(null, null);
+
+            Debug.Text = "----------------------------------------------------------";
+
         }
        
         void UserControl_Loaded(object sender, RoutedEventArgs e)
@@ -74,6 +79,21 @@ namespace LiveSmoothStreaming
             //SmoothPlayer.SmoothStreamingSource = new Uri(ManifestURL.Text);
             SmoothPlayer.Volume = .5;
             VolumeBar.Value = 5;
+
+
+
+            // my code to get params from url
+            String _message = null;
+            String manifestName = null;
+            IDictionary<string, string> qString = HtmlPage.Document.QueryString;
+            foreach (KeyValuePair<string, string> keyValuePair in qString)
+            {
+                if (keyValuePair.Key == "param1")
+                    _message = keyValuePair.Value;
+                if (keyValuePair.Key == "manifest")
+                    manifestName = keyValuePair.Value;
+            }
+            MessageBox.Show(manifestName);
         }
 
         void SmoothPlayer_ManifestReady(object sender, EventArgs e)

@@ -9,12 +9,16 @@
     Loaded="UserControl_Loaded" d:DesignHeight="500" xmlns:sdk="http://schemas.microsoft.com/winfx/2006/xaml/presentation/sdk">
 
     <Grid x:Name="LayoutRoot" Background="White" >
+
+
         <SSME:SmoothStreamingMediaElement AutoPlay="False" x:Name="SmoothPlayer"  Width="636" Height="360"  Background="Black" Margin="0,28,12,129" />
         <TextBlock x:Name="SLVersion"  HorizontalAlignment="Left" Margin="0,7,0,474" Text="Silverlight v?.?.?" VerticalAlignment="Center" Width="167" Height="19" />
         <StackPanel x:Name="controlsContainer" Orientation="Vertical" Width="636" HorizontalAlignment="Left" Margin="0,374,0,0">
             <StackPanel Orientation="Horizontal" Width="635"  Height="32" HorizontalAlignment="Left" Margin="0,2,0,2">
                 <TextBlock Text="volume " Height="22" Width="50" TextAlignment="Right" />
                 <Slider x:Name="VolumeBar" Maximum="10" ValueChanged="VolumeBar_ValueChanged" Width="134" />
+                <TextBlock x:Name="Debug" Width="150" Height="48" TextWrapping="Wrap" FontSize="16"  HorizontalAlignment="left" Text="TEST fsdfdsfsf sfa fds fasf " />
+
                 <TextBlock Text=" Current Bitrate: " FontWeight="Bold" Width="auto" Height="17" />
                 <TextBlock x:Name="BitRate" Text="0" FontWeight="Bold" Width="318" MinWidth="60" Height="17" />
                 <Image Source="fullscreen.png" x:Name="fullScreenButton" ToolTipService.ToolTip="Full Screen" MouseLeftButtonUp="Fullscreen_Click" Height="26" Width="26" Visibility="Visible" />
