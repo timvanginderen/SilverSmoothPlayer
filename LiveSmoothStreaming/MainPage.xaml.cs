@@ -90,6 +90,10 @@ namespace LiveSmoothStreaming
                 SLVersion.Visibility = Visibility.Collapsed;
                 fullScreenButton.Visibility = Visibility.Collapsed;
                 SmoothPlayer.Margin = new Thickness(0, 0, 0, 0);
+            } else
+            {
+                SmoothPlayer.Width = 800;
+                SmoothPlayer.Height = 600;
             }
 
             // play manifest url
