@@ -68,8 +68,9 @@ namespace LiveSmoothStreaming
             VolumeBar.Value = 5;
 
             // my code to get params from url
-            String manifestName = "eenhd";
+            String manifestName = "";
             Boolean debugMode = false;
+            bool stopPlayback = false;
 
             IDictionary<string, string> qString = HtmlPage.Document.QueryString;
             foreach (KeyValuePair<string, string> keyValuePair in qString)
@@ -79,6 +80,9 @@ namespace LiveSmoothStreaming
 
                 if (keyValuePair.Key == "debug")
                     debugMode = keyValuePair.Value == "true";
+
+                if (keyValuePair.Key == "stop")
+                    stopPlayback = keyValuePair.Value == "true";
             }
 
             // force somewhat full screen 
@@ -96,9 +100,13 @@ namespace LiveSmoothStreaming
                 SmoothPlayer.Height = 600;
             }
 
-            // play manifest url
-            ManifestURL.Text = "http://stream.linear.yelo.prd.telenet-ops.be/" + manifestName +".isml/manifest";
-            PlayButton_Click(null, null);
+            
+            if (!stopPlayback)
+            {
+                // play manifest url
+                ManifestURL.Text = "http://stream.linear.yelo.prd.telenet-ops.be/" + manifestName + ".isml/manifest";
+                PlayButton_Click(null, null);
+            }
         }
 
         void SmoothPlayer_ManifestReady(object sender, EventArgs e)
@@ -251,6 +259,12 @@ namespace LiveSmoothStreaming
             BitRate.Text = Math.Round(Convert.ToDecimal((e.NewTrack.Bitrate * .001))).ToString() + "kbs";
         }
 
+        //void StopPlayback()
+        //{
+        //    PlayButton.Content = "Disconnect";
+        //    PlayButton_Click(null, null);
+        //}
+       
         void PlayButton_Click(object sender, RoutedEventArgs e)
         {
             OutPut.Text = "";

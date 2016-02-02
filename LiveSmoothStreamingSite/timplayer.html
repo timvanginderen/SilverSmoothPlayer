@@ -50,10 +50,13 @@
             </a>
         </object><iframe id='_sl_historyFrame' style='visibility:hidden;height:0;width:0;border:0px'></iframe>
     </div>
+
     <div class="menuArea">
         <select id="selectChannel" onchange="channelChanged();">
             <option>Choose a channel</option>
         </select>
+
+        <button id="btnStop" onclick="onStopClicked();">Stop</button>
 
         <script type="text/javascript">
             var select = document.getElementById("selectChannel");
@@ -80,6 +83,10 @@
                 window.open(url, '_self');
             }
 
+            function init() {
+                initSelectBox();
+            }
+
             function initSelectBox() {
                 var params = getSearchParameters();
                 
@@ -88,6 +95,8 @@
                 }
 
                 if (params["manifest"] === undefined) {
+                    //var url = "timplayer.html?manifest=eenhd";
+                    //window.open(url, '_self');
                     return;
                 }
 
@@ -95,9 +104,11 @@
                 select.value = params["manifest"];
             }
 
-            function init() {
-                initSelectBox();
+            function onStopClicked() {
+                var url = "timplayer.html?stop=true";
+                window.open(url, '_self');
             }
+
 
             // param helper functions
             function getSearchParameters() {
