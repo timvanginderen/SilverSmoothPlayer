@@ -94,7 +94,8 @@ namespace LiveSmoothStreaming
                 SLVersion.Visibility = Visibility.Collapsed;
                 fullScreenButton.Visibility = Visibility.Collapsed;
                 SmoothPlayer.Margin = new Thickness(0, 0, 0, 0);
-            } else
+            }
+            else
             {
                 SmoothPlayer.Width = 800;
                 SmoothPlayer.Height = 600;
@@ -258,12 +259,6 @@ namespace LiveSmoothStreaming
         {
             BitRate.Text = Math.Round(Convert.ToDecimal((e.NewTrack.Bitrate * .001))).ToString() + "kbs";
         }
-
-        //void StopPlayback()
-        //{
-        //    PlayButton.Content = "Disconnect";
-        //    PlayButton_Click(null, null);
-        //}
        
         void PlayButton_Click(object sender, RoutedEventArgs e)
         {
