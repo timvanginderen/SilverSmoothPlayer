@@ -1,0 +1,120 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN"
+   "http://www.w3.org/TR/html4/strict.dtd">
+
+<html lang="en">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+	<title>Silverlight Player - Live Video Streaming | Wowza Media Systems</title>
+
+	<!-- Framework CSS -->
+	<link rel="stylesheet" href="css/screen.css" type="text/css" media="screen, projection">
+	<link rel="stylesheet" href="css/wowza.css" type="text/css" />
+    <script type="text/javascript" src="Silverlight.js"></script>
+    <style type="text/css">
+        html, body {
+	        height: 100%;
+	        overflow: hidden;
+        }
+        body {
+	        padding: 0;
+	        margin: 0;
+        }
+        #container {
+	        height: 100%;
+            width: 100%;
+	        text-align:center;
+            position: absolute;
+        }
+        .menuArea {
+            background-color: yellow;
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 125px;
+        }
+    </style>
+
+</head>
+<body onload="init()">
+        
+    <div id="container">
+        <object data="data:application/x-silverlight-2," type="application/x-silverlight-2" style="height: 100%; width: 100%;">
+            <param name="source" value="ClientBin/LiveSmoothStreaming.xap" />
+            <param name="onerror" value="onSilverlightError" />
+            <param name="background" value="white" />
+            <param name="enableGPUAcceleration" value="true" />
+            <param name="minRuntimeVersion" value="4.0.50401.0" />
+            <param name="autoUpgrade" value="true" />
+            <a href="http://go.microsoft.com/fwlink/?LinkID=149156&v=4.0.50401.0" style="text-decoration: none;">
+                <img src="http://go.microsoft.com/fwlink/?LinkID=161376" alt="Get Microsoft Silverlight" style="border-style: none" />
+            </a>
+        </object><iframe id='_sl_historyFrame' style='visibility:hidden;height:0;width:0;border:0px'></iframe>
+    </div>
+    <div class="menuArea">
+        <select id="selectChannel" onchange="channelChanged();">
+            <option>Choose a channel</option>
+        </select>
+
+        <script type="text/javascript">
+            var select = document.getElementById("selectChannel");
+            var options = ["eenhd", "vtmhd", "vierhd", "ketnetcanvashd", "vijfhd",
+                "vitaya", "acht", "rexrioinfo", "ketnet", "foxbelgium", "dicoveryhd",
+                "tlcvlaanderen", "njam", "sundancehd", "bbcprime", "nickjr",
+                "studio100tv", "menttv", "qmusic", "actuatv", "cartoonnetwork",
+                "xite", "ned1", "ned2", "ned3", "launehd", "ab3", "eurosporthd",
+                "eurosport2", "kanaalz", "natgeohd", "tmf", "disneyvl", "jim",
+                "nickelodeon", "vtmkzoom", "mtv", "playhousedisney", "ladeuxhd",
+                "rtltvihd", "clubrtlhd", "plugrtl", "latrois"];
+            for (var i = 0; i < options.length; i++) {
+                var opt = options[i];
+                var el = document.createElement("option");
+                el.textContent = opt;
+                el.value = opt;
+                select.appendChild(el);
+            }
+
+            var channelChanged = function () {
+                var manifest = document.getElementById("selectChannel").value;
+                var url = "timplayer.html?manifest=" + manifest;
+                window.open(url, '_self');
+            }
+
+            //Get manifest param to set select box value
+            function getSearchParameters() {
+                var prmstr = window.location.search.substr(1);
+                return prmstr != null && prmstr != "" ? transformToAssocArray(prmstr) : {};
+            }
+
+            function transformToAssocArray(prmstr) {
+                var params = {};
+                var prmarr = prmstr.split("&");
+                for (var i = 0; i < prmarr.length; i++) {
+                    var tmparr = prmarr[i].split("=");
+                    params[tmparr[0]] = tmparr[1];
+                }
+                return params;
+            }
+
+            function initSelectBox() {
+                var params = getSearchParameters();
+                
+                if (params === null || params === undefined) {
+                    return;
+                }
+
+                if (params["manifest"] === undefined) {
+                    return;
+                }
+
+                var select = document.getElementById("selectChannel");
+                select.value = params["manifest"];
+            }
+
+            function init() {
+                initSelectBox();
+            }
+        </script>
+    </div>
+
+</body>
+</html>
