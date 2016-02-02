@@ -65,6 +65,7 @@
                 "eurosport2", "kanaalz", "natgeohd", "tmf", "disneyvl", "jim",
                 "nickelodeon", "vtmkzoom", "mtv", "playhousedisney", "ladeuxhd",
                 "rtltvihd", "clubrtlhd", "plugrtl", "latrois"];
+
             for (var i = 0; i < options.length; i++) {
                 var opt = options[i];
                 var el = document.createElement("option");
@@ -73,26 +74,10 @@
                 select.appendChild(el);
             }
 
-            var channelChanged = function () {
+            function channelChanged() {
                 var manifest = document.getElementById("selectChannel").value;
                 var url = "timplayer.html?manifest=" + manifest;
                 window.open(url, '_self');
-            }
-
-            //Get manifest param to set select box value
-            function getSearchParameters() {
-                var prmstr = window.location.search.substr(1);
-                return prmstr != null && prmstr != "" ? transformToAssocArray(prmstr) : {};
-            }
-
-            function transformToAssocArray(prmstr) {
-                var params = {};
-                var prmarr = prmstr.split("&");
-                for (var i = 0; i < prmarr.length; i++) {
-                    var tmparr = prmarr[i].split("=");
-                    params[tmparr[0]] = tmparr[1];
-                }
-                return params;
             }
 
             function initSelectBox() {
@@ -112,6 +97,22 @@
 
             function init() {
                 initSelectBox();
+            }
+
+            // param helper functions
+            function getSearchParameters() {
+                var prmstr = window.location.search.substr(1);
+                return prmstr != null && prmstr != "" ? transformToAssocArray(prmstr) : {};
+            }
+
+            function transformToAssocArray(prmstr) {
+                var params = {};
+                var prmarr = prmstr.split("&");
+                for (var i = 0; i < prmarr.length; i++) {
+                    var tmparr = prmarr[i].split("=");
+                    params[tmparr[0]] = tmparr[1];
+                }
+                return params;
             }
         </script>
     </div>
